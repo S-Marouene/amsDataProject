@@ -53,7 +53,7 @@ public class ProviderController {
     }
     
     @PostMapping("add")
-    public String addProvider(@Valid Provider provider, BindingResult result, Model model) {
+    public String addProvider(@Valid Provider provider, BindingResult result) {
         if (result.hasErrors()) {
             return "provider/addProvider";
         }
@@ -96,7 +96,9 @@ public class ProviderController {
     @PostMapping("update")
     public String updateProvider(@Valid Provider provider, BindingResult result, Model model) {
     	
-    	
+    	 if (result.hasErrors()) {
+             return "provider/updateProvider";
+         }
     	providerRepository.save(provider);
     	return"redirect:list";
     	
